@@ -3,8 +3,14 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
+import Notiflix from 'notiflix';
 
 import css from './App.module.css';
+
+Notiflix.Notify.init({
+  position: 'center-top',
+  width: '300px',
+});
 
 class App extends Component {
   state = {
@@ -19,7 +25,7 @@ class App extends Component {
   addContact = newContact => {
     const isExist = this.state.contacts.some(el => el.name === newContact.name);
     if (isExist) {
-      alert(`${newContact.name} is already in contacts`);
+      Notiflix.Notify.failure(`${newContact.name} is already in contacts`);
       return;
     }
 
